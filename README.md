@@ -2,6 +2,8 @@ How to build deluge and dependencies 100% from source.
 
 You need to have installed:
 
+Visual Studio 2017
+
 [Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
 
 [nasm](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-installer-x64.exe)
