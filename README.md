@@ -16,6 +16,10 @@ Download gvsbuild(https://github.com/cas--/gvsbuild/archive/master.zip)
 
 And Extract to C:\gtk-build\github
 
+Download Libtorrent(https://github.com/arvidn/libtorrent/archive/RC_1_2.zip)
+
+And Extract to C:\
+
 Download Deluge(https://github.com/deluge-torrent/deluge/archive/develop.zip)
 
 And Extract to C:\
