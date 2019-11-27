@@ -20,8 +20,22 @@ Download Deluge(https://github.com/deluge-torrent/deluge/archive/develop.zip)
 
 And Extract to C:\
 
+Make sure the following are in your %PATH% environment variable.
+
+C:\Perl64\site\bin
+
+C:\Perl64\bin
+
+C:\Python\Python37
+
+C:\Python\Python37\Scripts
+
+C:\gtk-build\gtk\x64\release\bin
+
 From there run:
 1. OpenSSLBuild.bat
 2. LibtorrentBuild.bat
 3. GTK3Build.bat
 4. DelugeBuild.bat
+
+From here you can cmd/powershell deluge.exe or create a shortcut from C:\Python\Python37\Scripts .
