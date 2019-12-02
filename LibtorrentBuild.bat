@@ -16,4 +16,4 @@ del /S /Q C:\Users\doadin\AppData\Local\Temp\*
 del /S /Q C:\tmp\*
 
 cd C:\libtorrent-RC_1_2\bindings\python
-b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64
+b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
