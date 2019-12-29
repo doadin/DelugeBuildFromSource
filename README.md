@@ -14,6 +14,10 @@ Visual Studio 2017
 
 And Extract to C:\
 
+[Then download openssl](https://github.com/openssl/openssl/archive/master.zip)
+
+And Extract to C:\
+
 [Download gvsbuild](https://github.com/cas--/gvsbuild/archive/master.zip)
 
 And Extract to C:\gtk-build\github
