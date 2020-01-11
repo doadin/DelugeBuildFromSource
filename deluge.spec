@@ -20,11 +20,12 @@ def Entrypoint(dist, group, name, **kwargs):
     kwargs.setdefault('hiddenimports', [])
     kwargs.setdefault('datas', copy_metadata('Deluge'))
     kwargs.setdefault('binaries', [(os.path.join(typelib_path, tl), 'gi_typelibs') for tl in os.listdir(typelib_path)])
+    kwargs.setdefault('excludes', [])
     packages = []
     for distribution in kwargs['hiddenimports']:
         packages += get_toplevel(distribution)
 
-    kwargs.setdefault('pathex', [])
+    kwargs.setdefault('pathex', ['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib'])
     # get the entry point
     ep = pkg_resources.get_entry_info(dist, group, name)
     # insert path of the egg at the verify front of the search path
