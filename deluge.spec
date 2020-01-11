@@ -1,9 +1,13 @@
 from PyInstaller.utils.hooks import copy_metadata
 import os
 import site
+import sys
 
 #typelib_path = os.path.join(site.getsitepackages()[1], 'gnome', 'lib', 'girepository-1.0')
-typelib_path = 'C:\\gtk-build\\gtk\\x64\\release\\lib\\girepository-1.0'
+if sys.platform == 'win32':
+    typelib_path = 'C:\\gtk-build\\gtk\\x64\\release\\lib\\girepository-1.0'
+if sys.platform == 'darwin':
+    typelib_path = '/usr/local/lib/girepository-1.0' # Or Something like that?
 
 
 def Entrypoint(dist, group, name, **kwargs):
@@ -21,11 +25,11 @@ def Entrypoint(dist, group, name, **kwargs):
     kwargs.setdefault('datas', copy_metadata('Deluge'))
     kwargs.setdefault('binaries', [(os.path.join(typelib_path, tl), 'gi_typelibs') for tl in os.listdir(typelib_path)])
     kwargs.setdefault('excludes', [])
+    kwargs.setdefault('pathex', ['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib'])
     packages = []
     for distribution in kwargs['hiddenimports']:
         packages += get_toplevel(distribution)
 
-    kwargs.setdefault('pathex', ['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib'])
     # get the entry point
     ep = pkg_resources.get_entry_info(dist, group, name)
     # insert path of the egg at the verify front of the search path
@@ -43,16 +47,30 @@ def Entrypoint(dist, group, name, **kwargs):
         [script_path] + kwargs.get('scripts', []),
         **kwargs
     )
-a = Entrypoint('deluge==2.0.4', 'gui_scripts', 'deluge-gtk')
+
+a = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-console')
+b = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-web')
+c = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluged')
+if sys.platform == 'win32':
+    d = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-debug')
+    e = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-web-debug')
+    f = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluged-debug')
+
+g = Entrypoint('deluge==2.0.4', 'gui_scripts', 'deluge')
+h = Entrypoint('deluge==2.0.4', 'gui_scripts', 'deluge-gtk')
+
+i = Entrypoint('deluge==2.0.4', 'deluge.ui', 'console')
+j = Entrypoint('deluge==2.0.4', 'deluge.ui', 'web')
+k = Entrypoint('deluge==2.0.4', 'deluge.ui', 'gtk')
 
 #a.binaries + [('msvcp100.dll', 'C:\\Windows\\System32\\msvcp100.dll', 'BINARY'),
 #              ('msvcr100.dll', 'C:\\Windows\\System32\\msvcr100.dll', 'BINARY')]
 #a.datas + copy_metadata('Deluge'),
  
 
-pyz = PYZ(a.pure, a.zipped_data)
+pyz = PYZ(h.pure, h.zipped_data)
 exe = EXE(pyz,
-          a.scripts,
+          h.scripts,
           [],
           exclude_binaries=True,
           name='Deluge',
@@ -65,9 +83,9 @@ exe = EXE(pyz,
 
 
 coll = COLLECT(exe,
-               a.binaries,
-               a.zipfiles,
-               a.datas,
+               h.binaries,
+               h.zipfiles,
+               h.datas,
                strip=False,
                upx=True,
                upx_exclude=[],
