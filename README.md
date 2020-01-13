@@ -1,51 +1,44 @@
-How to build deluge and dependencies 100% from source.
 
-You need to have installed:
+# How to build Deluge and dependencies 100% from source:
 
-Visual Studio 2017
+- You need to have installed:
 
-[Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
+  - Visual Studio 2017
+  - [Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
+  - [nasm](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-installer-x64.exe)
+  - [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork?utm_campaign=fork-perl&utm_medium=website&utm_source=activestate.com&utm_term=perl5.28&utm_content=fork-activeperl5.28)
 
-[nasm](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-installer-x64.exe)
+- Download the following .zip files : 
 
-[ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork?utm_campaign=fork-perl&utm_medium=website&utm_source=activestate.com&utm_term=perl5.28&utm_content=fork-activeperl5.28)
+  - [boost](https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.zip)
+  - [openssl](https://github.com/openssl/openssl/archive/master.zip)
+  - [gvsbuild](https://github.com/cas--/gvsbuild/archive/master.zip)
+  - [Libtorrent](https://github.com/arvidn/libtorrent/archive/RC_1_2.zip)
+  - [Deluge](https://github.com/deluge-torrent/deluge/archive/develop.zip)
 
-[Then download boost](https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.zip)
+  and extract each of these archives to a seperate folder in `C:\`   
+  and the gvsbuild [master.zip](https://github.com/cas--/gvsbuild/archive/master.zip) to `C:\gtk-build\github` .
+  
+- Make sure the following are in your `PATH` environment variable:
 
-And Extract to C:\
+  ```text
+  C:\Perl64\site\bin
+  C:\Perl64\bin
+  C:\Python\Python37
+  C:\Python\Python37\Scripts
+  C:\gtk-build\gtk\x64\release\bin
+  ```
 
-[Then download openssl](https://github.com/openssl/openssl/archive/master.zip)
+- Now run the following batch files in the given order:
 
-And Extract to C:\
+  ```text
+  OpenSSLBuild.bat
 
-[Download gvsbuild](https://github.com/cas--/gvsbuild/archive/master.zip)
+  LibtorrentBuild.bat
+  
+  GTK3Build.bat
+  
+  DelugeBuild.bat
+  ```
 
-And Extract to C:\gtk-build\github
-
-[Download Libtorrent](https://github.com/arvidn/libtorrent/archive/RC_1_2.zip)
-
-And Extract to C:\
-
-[Download Deluge](https://github.com/deluge-torrent/deluge/archive/develop.zip)
-
-And Extract to C:\
-
-Make sure the following are in your %PATH% environment variable.
-
->C:\Perl64\site\bin
-
->C:\Perl64\bin
-
->C:\Python\Python37
-
->C:\Python\Python37\Scripts
-
->C:\gtk-build\gtk\x64\release\bin
-
-From there run:
-1. OpenSSLBuild.bat
-2. LibtorrentBuild.bat
-3. GTK3Build.bat
-4. DelugeBuild.bat
-
-From here you can cmd/powershell deluge.exe or create a shortcut from C:\Python\Python37\Scripts .
+- Finally you may run `deluge.exe` via cmd/powershell, or create a shortcut from `C:\Python\Python37\Scripts` .
