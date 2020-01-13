@@ -12,12 +12,12 @@
 
   - [boost](https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.zip)
   - [openssl](https://github.com/openssl/openssl/archive/master.zip)
-  - [gvsbuild](https://github.com/cas--/gvsbuild/archive/master.zip)
+  - [gvsbuild](https://github.com/wingtk/gvsbuild/archive/master.zip)
   - [Libtorrent](https://github.com/arvidn/libtorrent/archive/RC_1_2.zip)
   - [Deluge](https://github.com/deluge-torrent/deluge/archive/develop.zip)
 
   and extract each of these archives to a seperate folder in `C:\`   
-  and the gvsbuild [master.zip](https://github.com/cas--/gvsbuild/archive/master.zip) to `C:\gtk-build\github` .
+  and the gvsbuild [master.zip](https://github.com/wingtk/gvsbuild/archive/master.zip) to `C:\gtk-build\github` .
   
 - Make sure the following are in your `PATH` environment variable:
 
