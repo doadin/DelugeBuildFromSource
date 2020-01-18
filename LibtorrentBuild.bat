@@ -12,8 +12,5 @@ set VS_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Too
 set OPENSSL_PATH=C:\OpenSSL-Win64\bin
 set PATH=%BOOST_ROOT%;%VS_PATH%;%PYTHON_PATH%;%OPENSSL_PATH%;%PATH%
 
-del /S /Q C:\Users\doadin\AppData\Local\Temp\*
-del /S /Q C:\tmp\*
-
 cd C:\libtorrent-RC_1_2\bindings\python
 b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
