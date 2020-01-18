@@ -16,7 +16,8 @@
   - [Libtorrent](https://github.com/arvidn/libtorrent/archive/RC_1_2.zip)
   - [Deluge](https://github.com/deluge-torrent/deluge/archive/develop.zip)
 
-  and extract each of these archives to a seperate folder in `C:\`   
+  and extract each of these archives to a seperate folder in `C:\`
+  and the openssl [master.zip](https://github.com/openssl/openssl/archive/master.zip) to `C:\OpenSSL`
   and the gvsbuild [master.zip](https://github.com/wingtk/gvsbuild/archive/master.zip) to `C:\gtk-build\github` .
   
 - Make sure the following are in your `PATH` environment variable:
