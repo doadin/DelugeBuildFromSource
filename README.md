@@ -28,6 +28,7 @@
   C:\Python\Python37
   C:\Python\Python37\Scripts
   C:\gtk-build\gtk\x64\release\bin
+  C:\OpenSSL-Win64\bin
   ```
 
 - Now run the following batch files in the given order:
