@@ -34,7 +34,7 @@
 - Now run the following batch files in the given order:
 
   ```text
-  BuildB2.bat
+  BuildB2.bat(Only needed for first build or fresh build)
   
   OpenSSLBuild.bat
 
