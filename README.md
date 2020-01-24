@@ -1,6 +1,7 @@
 
 # How to build Deluge and dependencies 100% from source:
 
+- All info is for a 64-bit build but instructions should be very similar and scripts need very little editing to make 32-bit instead.
 - You need to have installed:
 
   - Visual Studio 2017
