@@ -7,6 +7,7 @@
   - [Python](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)
   - [nasm](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-installer-x64.exe)
   - [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork?utm_campaign=fork-perl&utm_medium=website&utm_source=activestate.com&utm_term=perl5.28&utm_content=fork-activeperl5.28)
+  - [Msys64](http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20190524.exe)
 
 - Download the following .zip files : 
 
