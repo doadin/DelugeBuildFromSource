@@ -34,6 +34,8 @@
 - Now run the following batch files in the given order:
 
   ```text
+  BuildB2.bat
+  
   OpenSSLBuild.bat
 
   LibtorrentBuild.bat
