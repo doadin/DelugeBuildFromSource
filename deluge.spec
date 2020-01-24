@@ -26,7 +26,7 @@ def Entrypoint(dist, group, name, **kwargs):
         else:
             return []
 
-    kwargs.setdefault('hiddenimports', collect_submodules('twisted.internet._glibase') + ["twisted"])
+    kwargs.setdefault('hiddenimports', ["twisted"])
     #kwargs.setdefault('excluded_binaries', [])
     kwargs.setdefault('datas', copy_metadata('Deluge'))
     #kwargs.setdefault('binaries', [(os.path.join(typelib_path, tl), 'gi_typelibs') for tl in os.listdir(typelib_path)])
