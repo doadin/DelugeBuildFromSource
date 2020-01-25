@@ -1,16 +1,49 @@
+ECHO Setting VS_VER Variable.....
 set VS_VER=15
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting VS_VCVARS Variable.....
 set VS_VCVARS=14.16
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting arch Variable.....
 set arch=amd64
-cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"
-call vcvars64.bat
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO CD to VS.....
+if NOT exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build" echo VS 2017 not found
+cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build" || exit /b
+ECHO Setting up VS.....
+call vcvars64.bat || exit /b
+ECHO Setting PYTHON_PATH Variable.....
+if NOT exist "C:\Python\Python37" echo python not found
 set PYTHON_PATH=C:\Python\Python37
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting INCLUDE Variable.....
+if NOT exist "C:\OpenSSL-Win64\include" echo OpenSSL-Win64\include not found
 set INCLUDE=C:\OpenSSL-Win64\include;%INCLUDE%
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting LIB Variable.....
+if NOT exist "C:\OpenSSL-Win64\lib" echo OpenSSL-Win64\lib not found
 set LIB=C:\OpenSSL-Win64\lib;%LIB%
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting BOOST_ROOT Variable.....
+if NOT exist "C:\boost_1_70_0" echo bost source not found
 set BOOST_ROOT=C:\boost_1_70_0
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting BOOST_BUILD_PATH Variable.....
 set BOOST_BUILD_PATH=%BOOST_ROOT%
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting VS_PATH Variable.....
+if NOT exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64" echo VS path not found
 set VS_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting OPENSSL_PATH Variable.....
+if NOT exist "C:\OpenSSL-Win64\bin" echo OpenSSL-Win64\bin not found
 set OPENSSL_PATH=C:\OpenSSL-Win64\bin
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO Setting PATH Variable.....
 set PATH=%BOOST_ROOT%;%VS_PATH%;%PYTHON_PATH%;%OPENSSL_PATH%;%PATH%
-
-cd C:\libtorrent-RC_1_2\bindings\python
-b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
+if NOT ["%errorlevel%"]==["0"] pause
+ECHO CD to Libtorrent\bindings.....
+if NOT exist "C:\libtorrent-RC_1_2\bindings\python" echo libtorrent-RC_1_2\bindings\python not found
+cd C:\libtorrent-RC_1_2\bindings\python || exit /b
+ECHO Compileing Python Libtorrent.....
+b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl || exit /b
