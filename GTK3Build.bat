@@ -66,7 +66,7 @@ REM cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\To
 REM call VsDevCmd.bat -arch=%arch% -host_arch=%arch% -vcvars_ver=%VS_VCVARS%
 ECHO ON
 ECHO CD to VS.....
-if NOT exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"" echo VS 2017 not found
+if NOT exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build" echo VS 2017 not found
 cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build" || exit /b
 ECHO Setting up VS.....
 call vcvars64.bat || exit /b
@@ -75,8 +75,8 @@ REM cd "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC"
 REM call vcvarsall.bat amd64
 ECHO ON
 ECHO CD to gvsbuild.....
-if NOT exist "C:\gtk-build\github\gvsbuild-master" echo gvsbuild not found
-cd C:\gtk-build\github\gvsbuild-master || exit /b
+if NOT exist "C:\gtk-build\github\gvsbuild" echo gvsbuild not found
+cd C:\gtk-build\github\gvsbuild || exit /b
 ECHO OFF
 REM %PYTHON% build.py build --archives-download-dir=%DOWNLOAD_DIR% --platform=x64 --vs-ver=%VS_VER% --python-dir=C:\Python\Python37 -k --enable-gi --py-wheel --py-egg --python-ver 3.7 enchant gtk gtk3-full pycairo pygobject lz4
 ECHO ON
