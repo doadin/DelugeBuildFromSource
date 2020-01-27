@@ -80,6 +80,6 @@ cd C:\gtk-build\github\gvsbuild || exit /b
 ECHO OFF
 REM %PYTHON% build.py build --archives-download-dir=%DOWNLOAD_DIR% --platform=x64 --vs-ver=%VS_VER% --python-dir=C:\Python\Python37 -k --enable-gi --py-wheel --py-egg --python-ver 3.7 enchant gtk gtk3-full pycairo pygobject lz4
 ECHO ON
-python build.py build -v -d --gtk3-ver=3.24 --archives-download-dir=%DOWNLOAD_DIR% --vs-ver=%VS_VER% --platform=x64 --vs-install-path="c:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --python-dir=C:\Python\Python37 -k --enable-gi --py-wheel --py-egg --python-ver=3.7 enchant gtk gtk3-full pycairo pygobject lz4 || exit /b
+python build.py -d build --gtk3-ver=3.24 --archives-download-dir=%DOWNLOAD_DIR% --vs-ver=%VS_VER% --platform=x64 --vs-install-path="c:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --python-dir=C:\Python\Python37 -k --enable-gi --py-wheel --py-egg --python-ver=3.7 enchant gtk gtk3-full pycairo pygobject lz4 || exit /b
 IF "%PLATFORM%"=="x86" tar.exe -zcf gvsbuild-vs%VS_VER%-%PLATFORM%-%PYTHONVER%.tar.gz -C c:/gtk-build/gtk/Win32 release || exit /b
 IF "%PLATFORM%"=="x64" tar.exe -zcf gvsbuild-vs%VS_VER%-%PLATFORM%-%PYTHONVER%.tar.gz -C c:/gtk-build/gtk/x64 release || exit /b
