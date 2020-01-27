@@ -77,6 +77,8 @@ ECHO ON
 ECHO CD to gvsbuild.....
 if NOT exist "C:\gtk-build\github\gvsbuild" echo gvsbuild not found
 cd C:\gtk-build\github\gvsbuild || exit /b
+ECHO Install wheel.....
+pip install wheel || exit /b
 ECHO OFF
 REM %PYTHON% build.py build --archives-download-dir=%DOWNLOAD_DIR% --platform=x64 --vs-ver=%VS_VER% --python-dir=C:\Python\Python37 -k --enable-gi --py-wheel --py-egg --python-ver 3.7 enchant gtk gtk3-full pycairo pygobject lz4
 ECHO ON
