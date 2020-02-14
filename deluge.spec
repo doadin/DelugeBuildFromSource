@@ -151,7 +151,7 @@ def Entrypoint(dist, group, name, **kwargs):
 getversion = str(deluge.common.get_version())
 version = ''' + getversion + '''
 #a = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-console')
-b = Entrypoint(version', 'console_scripts', 'deluge-web')
+b = Entrypoint(version, 'console_scripts', 'deluge-web')
 c = Entrypoint(version, 'console_scripts', 'deluged')
 if sys.platform == 'win32':
     #d = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluge-debug')
