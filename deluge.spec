@@ -148,25 +148,24 @@ def Entrypoint(dist, group, name, **kwargs):
         [script_path] + kwargs.get('scripts', []),
         **kwargs
     )
-
+getversion = str(deluge.common.get_version())
+version = ''' + getversion + '''
 #a = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-console')
-b = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluge-web')
-c = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluged')
+b = Entrypoint(version', 'console_scripts', 'deluge-web')
+c = Entrypoint(version, 'console_scripts', 'deluged')
 if sys.platform == 'win32':
     #d = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluge-debug')
-    e = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluge-web-debug')
-    f = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluged-debug')
+    e = Entrypoint(version, 'console_scripts', 'deluge-web-debug')
+    f = Entrypoint(version, 'console_scripts', 'deluged-debug')
 
-g = Entrypoint('deluge==2.0.3', 'gui_scripts', 'deluge')
-h = Entrypoint('deluge==2.0.3', 'gui_scripts', 'deluge-gtk')
+g = Entrypoint(version, 'gui_scripts', 'deluge')
+h = Entrypoint(version, 'gui_scripts', 'deluge-gtk')
 
 #i = Entrypoint('deluge==2.0.4', 'deluge.ui', 'console')
 #j = Entrypoint('deluge==2.0.4', 'deluge.ui', 'web')
 #k = Entrypoint('deluge==2.0.4', 'deluge.ui', 'gtk')
 
 #options = [ ('v', None, 'OPTION'), ('W ignore', None, 'OPTION') ]
-
-version = deluge.common.get_version()
 
 pyz = PYZ(h.pure, h.zipped_data)
 exe = EXE(pyz,
