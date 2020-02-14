@@ -148,18 +148,17 @@ def Entrypoint(dist, group, name, **kwargs):
         [script_path] + kwargs.get('scripts', []),
         **kwargs
     )
-getversion = deluge.common.get_version()
-version = "'" + getversion + "'"
+getversion = str(deluge.common.get_version())
 #a = Entrypoint('deluge==2.0.4', 'console_scripts', 'deluge-console')
-b = Entrypoint(version, 'console_scripts', 'deluge-web')
-c = Entrypoint(version, 'console_scripts', 'deluged')
+b = Entrypoint('deluge==' + getversion, 'console_scripts', 'deluge-web')
+c = Entrypoint('deluge==' + getversion, 'console_scripts', 'deluged')
 if sys.platform == 'win32':
     #d = Entrypoint('deluge==2.0.3', 'console_scripts', 'deluge-debug')
-    e = Entrypoint(version, 'console_scripts', 'deluge-web-debug')
-    f = Entrypoint(version, 'console_scripts', 'deluged-debug')
+    e = Entrypoint('deluge==' + getversion, 'console_scripts', 'deluge-web-debug')
+    f = Entrypoint('deluge==' + getversion, 'console_scripts', 'deluged-debug')
 
-g = Entrypoint(version, 'gui_scripts', 'deluge')
-h = Entrypoint(version, 'gui_scripts', 'deluge-gtk')
+g = Entrypoint('deluge==' + getversion, 'gui_scripts', 'deluge')
+h = Entrypoint('deluge==' + getversion, 'gui_scripts', 'deluge-gtk')
 
 #i = Entrypoint('deluge==2.0.4', 'deluge.ui', 'console')
 #j = Entrypoint('deluge==2.0.4', 'deluge.ui', 'web')
