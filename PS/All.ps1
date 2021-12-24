@@ -174,7 +174,9 @@ function Build64Deluge {
     $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
     
-
+    Write-Host "Prepareing Boost C++..."
+    Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
+    
     Write-Host "Compileing Lbitorrent For Python..."
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
