@@ -164,9 +164,6 @@ function Build64Deluge {
         Write-Host "Installing Libtorrent Source Code..."
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x libtorrent.zip -oc:\
-        Set-Location -Path 'C:\libtorrent-RC_1_2\bindings\python'
-        Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
-        b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
     }
     if ( -not (Test-Path 'C:\deluge-develop' -PathType Container) ) { 
         Write-Host "Installing Deluge Source Code..."
@@ -176,6 +173,12 @@ function Build64Deluge {
 
     $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
+    
+
+    Write-Host "Compileing Lbitorrent For Python..."
+    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
+    b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
+    
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path C:\gvsbuild-master
