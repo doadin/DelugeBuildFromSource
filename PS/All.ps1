@@ -183,6 +183,7 @@ function Build64Deluge {
         
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     Set-Location -Path 'C:\deluge-develop\'
+    python -m pip install -r requirements.txt
     python setup.py build
     python setup.py install
 }
