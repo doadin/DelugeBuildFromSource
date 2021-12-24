@@ -148,10 +148,6 @@ function Build64Deluge {
         Write-Host "Installing OpenSSL Source Code..."
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x openssl.zip -oc:\
-        perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
-        nmake
-        nmake test
-        nmake install
     }
     if ( -not (Test-Path 'C:\gvsbuild-master' -PathType Container) ) { 
         Write-Host "Installing GTK+3 Build Tools..."
@@ -171,6 +167,13 @@ function Build64Deluge {
 
     $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
+    
+    Write-Host "Compileing OpenSSL..."
+    Set-Location -Path 'C:\openssl-master\'
+    perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
+    nmake
+    nmake test
+    nmake install
     
     Write-Host "Prepareing Boost C++..."
     Set-Location -Path 'C:\boost_1_77_0\'
