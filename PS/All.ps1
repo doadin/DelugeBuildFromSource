@@ -172,6 +172,11 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x deluge.zip -oc:\
     }
+
+    Write-Host "Compileing GTK+3 For Python..."
+    Set-Location -Path C:\gvsbuild-master
+    python .\build.py build -p=x64 --vs-ver=16 --msys-dir=C:\tools\msys64 --gtk3-ver=3.24 gtk3
+    
     $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
     
