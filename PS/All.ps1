@@ -23,6 +23,11 @@ function test-is64bitOS() {
     return [System.Environment]::Is64BitOperatingSystem
 }
 function Build64Deluge {
+    if ( -not (Test-Path 'C:\DelugeDownloads\' -PathType Container) ) { 
+        Write-Host "Creating Downloads Folder..."
+        New-Item -ItemType Directory -Force -Path 'C:\DelugeDownloads\'
+    }
+
     $WebClient = New-Object System.Net.WebClient
     
     if ( -not (Test-Path 'C:\DelugeDownloads\vs_Community.exe' -PathType Leaf) ) { 
