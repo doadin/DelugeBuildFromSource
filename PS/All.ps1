@@ -175,15 +175,17 @@ function Build64Deluge {
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
     
     Write-Host "Prepareing Boost C++..."
+    Set-Location -Path 'C:\boost_1_77_0\'
     Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
     
     Write-Host "Compileing Lbitorrent For Python..."
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
+    Set-Location -Path 'C:\libtorrent-RC_1_2'
     b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
     
 
     Write-Host "Compileing GTK+3 For Python..."
-    Set-Location -Path C:\gvsbuild-master
+    Set-Location -Path 'C:\gvsbuild-master'
     python .\build.py build -p=x64 --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
         
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
