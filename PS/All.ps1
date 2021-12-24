@@ -113,7 +113,7 @@ function Build64Deluge {
     if ( -not (Test-Path 'C:\Program Files\Python37' -PathType Container) ) { 
         Write-Host "Installing Python..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        Start-Process -FilePath "C:\DelugeDownloads\python-3.7.9.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
+        Start-Process -FilePath "C:\DelugeDownloads\python-3.7.9-amd64.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
     }
     if ( -not (Test-Path 'C:\nasm-2.15' -PathType Container) ) { 
         Write-Host "Installing NASM..."
