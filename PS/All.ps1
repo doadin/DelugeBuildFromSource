@@ -140,10 +140,8 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         New-Item -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam"
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 14.1 ;'
-        Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using gcc ;'
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Program Files\\Python37 : C:\\Program Files\\Python37\\include : C:\\Program Files\\Python37\\libs ;'
         Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
-        Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
         7z x boost_1_77_0.zip -oc:\
     }
     if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
@@ -177,11 +175,12 @@ function Build64Deluge {
     Write-Host "Prepareing Boost C++..."
     Set-Location -Path 'C:\boost_1_77_0\'
     Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
+    .\b2
     
     Write-Host "Compileing Lbitorrent For Python..."
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     Set-Location -Path 'C:\libtorrent-RC_1_2'
-    b2 libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
+    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
     
 
     Write-Host "Compileing GTK+3 For Python..."
