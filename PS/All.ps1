@@ -188,7 +188,8 @@ function Build64Deluge {
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path 'C:\gvsbuild-master'
-    python .\build.py build -p=x64 --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
+    ## python .\build.py build -p=x64 --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
+    python build.py -d build --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
         
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     Set-Location -Path 'C:\deluge-develop\'
