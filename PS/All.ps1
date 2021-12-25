@@ -74,6 +74,15 @@ function Build64Deluge {
         Write-Host "Downloading 7-zip..."
         $WebClient.DownloadFile("https://www.7-zip.org/a/7z2106-x64.msi","C:\DelugeDownloads\7z2106-x64.msi")
     }
+    if ( -not (Test-Path 'C:\DelugeDownloads\Git-2.34.1-64-bit.exe' -PathType Leaf) ) { 
+        Write-Host "Downloading Git..."
+        $WebClient.DownloadFile("https://github.com/git-for-windows/git/releases/download/v2.34.1.windows.1/Git-2.34.1-64-bit.exe","C:\DelugeDownloads\Git-2.34.1-64-bit.exe")
+    }
+    if ( -not (Test-Path 'C:\Program Files\Git\cmd' -PathType Container) ) { 
+        Write-Host "Installing Git..."
+        Set-Location -Path 'C:\DelugeDownloads\'
+        Start-Process -FilePath "C:\DelugeDownloads\Git-2.34.1-64-bit.exe" -ArgumentList "/VERYSILENT", "/SP-", "/SUPPRESSMSGBOXES", "/NORESTART", "/FORCECLOSEAPPLICATIONS" -Wait
+    }
     
     if ( -not (Test-Path 'C:\Program Files\7-Zip' -PathType Container) ) { 
         Write-Host "Installing 7-Zip..."
