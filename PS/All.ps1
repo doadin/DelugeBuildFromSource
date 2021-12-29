@@ -366,5 +366,6 @@ if (test-is64bitOS) {
 }
 
 if ( -not (test-is64bitOS)) {
-    Build32Deluge
+    ## Build32Deluge
+    Write-Host "32 Bit Build Setup Not Yet Supported..."
 }
