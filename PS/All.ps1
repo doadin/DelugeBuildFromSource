@@ -40,7 +40,7 @@ function Build64Deluge {
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\nasm-2.15-win64.zip' -PathType Leaf) ) { 
         Write-Host "Downloading Nasm..."
-        $WebClient.DownloadFile("https://www.nasm.us/pub/nasm/releasebuilds/2.15/win64/nasm-2.15-win64.zip","C:\DelugeDownloads\nasm-2.15-win64.zip")
+        $WebClient.DownloadFile("https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.zip","C:\DelugeDownloads\nasm-2.15.05-win64.zip")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit-portable.zip' -PathType Leaf) ) { 
         Write-Host "Downloading ActivePerl..."
@@ -124,10 +124,10 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         Start-Process -FilePath "C:\DelugeDownloads\python-3.7.9-amd64.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
     }
-    if ( -not (Test-Path 'C:\nasm-2.15' -PathType Container) ) { 
+    if ( -not (Test-Path 'C:\nasm-2.15.05' -PathType Container) ) { 
         Write-Host "Installing NASM..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        7z x nasm-2.15-win64.zip -oc:\
+        7z x nasm-2.15.05-win64.zip -oc:\
     }
     ## if ( -not (Test-Path 'C:\Perl64' -PathType Container) ) { 
     ##     Write-Host "Installing Active State Perl..."
@@ -150,7 +150,6 @@ function Build64Deluge {
         New-Item -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam"
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 15 ;'
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Program Files\\Python37 : C:\\Program Files\\Python37\\include : C:\\Program Files\\Python37\\libs ;'
-        Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
         7z x boost_1_77_0.zip -oc:\
     }
     if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
@@ -174,8 +173,11 @@ function Build64Deluge {
         7z x deluge.zip -oc:\
     }
 
-    $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;$env:Path"
-    $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15;C:\Perl64\bin;C:\msys64\bin;"
+    $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\bin;C:\msys64\bin;$env:Path"
+    $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\bin;C:\msys64\bin;"
+    $env:BOOST_ROOT="c:\boost_1_77_0"
+    $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
+    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\vcvars64.bat"
     
     Write-Host "Compileing OpenSSL..."
     Set-Location -Path 'C:\openssl-master\'
@@ -187,20 +189,18 @@ function Build64Deluge {
     Write-Host "Prepareing Boost C++..."
     Set-Location -Path 'C:\boost_1_77_0\'
     Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
-    .\b2
+    b2 openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
     Write-Host "Compileing Lbitorrent For Python..."
-    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     Set-Location -Path 'C:\libtorrent-RC_1_2'
-    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl
+    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path 'C:\gvsbuild-master'
     ## python .\build.py build -p=x64 --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
     python build.py -d build --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
-        
-    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
+    
     Set-Location -Path 'C:\deluge-develop\'
     python -m pip install -r requirements.txt
     python setup.py build
