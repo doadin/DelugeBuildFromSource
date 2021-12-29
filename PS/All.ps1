@@ -54,9 +54,9 @@ function Build64Deluge {
         Write-Host "Downloading Boost C++ Source Code..."
         $WebClient.DownloadFile("https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.zip","C:\DelugeDownloads\boost_1_77_0.zip")
     }
-    if ( -not (Test-Path 'C:\DelugeDownloads\openssl.zip' -PathType Leaf) ) { 
+    if ( -not (Test-Path 'C:\DelugeDownloads\OpenSSL_1_1_1m.zip' -PathType Leaf) ) { 
         Write-Host "Downloading OpenSSL Source Code..."
-        $WebClient.DownloadFile("https://github.com/openssl/openssl/archive/master.zip","C:\DelugeDownloads\openssl.zip")
+        $WebClient.DownloadFile("https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1m.zip","C:\DelugeDownloads\OpenSSL_1_1_1m.zip")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\gvsbuild.zip' -PathType Leaf) ) { 
         Write-Host "Downloading GTK3+ gvsbuild tools..."
@@ -135,7 +135,7 @@ function Build64Deluge {
     ##     Start-Process -FilePath "C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit.msi" -ArgumentList "/exenoui", "/exenoupdates" -Wait
     ## }
     if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
-        Write-Host "Installing OpenSSL Source Code..."
+        Write-Host "Installing Strawberry Perl..."
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x strawberry-perl-5.14.4.1-64bit-portable.zip -oc:\perl\
     }
@@ -152,10 +152,10 @@ function Build64Deluge {
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Program Files\\Python37 : C:\\Program Files\\Python37\\include : C:\\Program Files\\Python37\\libs ;'
         7z x boost_1_77_0.zip -oc:\
     }
-    if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
+    if ( -not (Test-Path 'C:\openssl-OpenSSL_1_1_1m' -PathType Container) ) { 
         Write-Host "Installing OpenSSL Source Code..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        7z x openssl.zip -oc:\
+        7z x OpenSSL_1_1_1m.zip -oc:\
     }
     if ( -not (Test-Path 'C:\gvsbuild-master' -PathType Container) ) { 
         Write-Host "Installing GTK+3 Build Tools..."
@@ -180,7 +180,7 @@ function Build64Deluge {
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\vcvars64.bat"
     
     Write-Host "Compileing OpenSSL..."
-    Set-Location -Path 'C:\openssl-master\'
+    Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
     perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
     nmake
     nmake test
@@ -189,7 +189,7 @@ function Build64Deluge {
     Write-Host "Prepareing Boost C++..."
     Set-Location -Path 'C:\boost_1_77_0\'
     Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
-    b2 openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    b2
     
     Write-Host "Compileing Lbitorrent For Python..."
     Set-Location -Path 'C:\libtorrent-RC_1_2'
