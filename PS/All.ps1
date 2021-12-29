@@ -134,10 +134,10 @@ function Build64Deluge {
     ##     Set-Location -Path 'C:\DelugeDownloads\'
     ##     Start-Process -FilePath "C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit.msi" -ArgumentList "/exenoui", "/exenoupdates" -Wait
     ## }
-    if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
+    if ( -not (Test-Path 'C:\Perl64' -PathType Container) ) { 
         Write-Host "Installing Strawberry Perl..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        7z x strawberry-perl-5.14.4.1-64bit-portable.zip -oc:\perl\
+        7z x strawberry-perl-5.14.4.1-64bit-portable.zip -oc:\Perl64\
     }
     if ( -not (Test-Path 'C:\msys64' -PathType Container) ) { 
         Write-Host "Installing msys..."
