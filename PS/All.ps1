@@ -186,20 +186,20 @@ function Build64Deluge {
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\VC\Auxiliary\build\vcvars64.bat"
     
     Write-Host "Compileing OpenSSL..."
-    ## Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
-    ## perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
-    ## nmake
+    Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
+    perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
+    nmake
     ## nmake test
-    ## nmake install
+    nmake install
     
-    ## Write-Host "Prepareing Boost C++..."
-    ## Set-Location -Path 'C:\boost_1_77_0\'
-    ## Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
-    ## b2
+    Write-Host "Prepareing Boost C++..."
+    Set-Location -Path 'C:\boost_1_77_0\'
+    Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
+    b2
     
-    ## Write-Host "Compileing Lbitorrent For Python..."
-    ## Set-Location -Path 'C:\libtorrent-RC_1_2'
-    ## b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    Write-Host "Compileing Lbitorrent For Python..."
+    Set-Location -Path 'C:\libtorrent-RC_1_2'
+    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
 
     Write-Host "Compileing GTK+3 For Python..."
@@ -208,10 +208,11 @@ function Build64Deluge {
     python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
-    ## Set-Location -Path 'C:\deluge-develop\'
-    ## python -m pip install -r requirements.txt
-    ## python setup.py build
-    ## python setup.py install
+    Set-Location -Path 'C:\deluge-develop\'
+    python -m pip install -r requirements.txt
+    python setup.py clean
+    python setup.py build
+    python setup.py install
 }
 
 function Build32Deluge {
