@@ -46,9 +46,9 @@ function Build64Deluge {
         Write-Host "Downloading Strawberry Perl..."
         $WebClient.DownloadFile("https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit-portable.zip","C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit-portable.zip")
     }
-    if ( -not (Test-Path 'C:\DelugeDownloads\msys2-x86_64-20211130.exe' -PathType Leaf) ) { 
+    if ( -not (Test-Path 'C:\DelugeDownloads\msys2-base-x86_64-20211130.tar.xz' -PathType Leaf) ) { 
         Write-Host "Downloading Msys2..."
-        $WebClient.DownloadFile("http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20211130.exe","C:\DelugeDownloads\msys2-x86_64-20211130.exe")
+        $WebClient.DownloadFile("https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20211130.tar.xz","C:\DelugeDownloads\msys2-base-x86_64-20211130.tar.xz")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\boost_1_77_0.zip' -PathType Leaf) ) { 
         Write-Host "Downloading Boost C++ Source Code..."
