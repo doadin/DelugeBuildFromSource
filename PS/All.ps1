@@ -179,8 +179,8 @@ function Build64Deluge {
         7z x deluge.zip -oc:\
     }
 
-    $env:Path = "C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
-    $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
+    $env:Path = "C:\Program Files\Git\bin;CC:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
+    $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     $env:BOOST_ROOT="c:\boost_1_77_0"
     $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\VC\Auxiliary\build\vcvars64.bat"
