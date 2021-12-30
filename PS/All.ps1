@@ -147,6 +147,8 @@ function Build64Deluge {
         Write-Host "Installing msys..."
         Set-Location -Path 'C:\DelugeDownloads\'
         Start-Process -FilePath "C:\DelugeDownloads\msys2-x86_64-20211130.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
+        7z x msys2-base-x86_64-20211130.tar.xz -oc:\DelugeDownloads\
+        7z x msys2-base-x86_64-20211130.tar -oc:\
     }
     if ( -not (Test-Path 'C:\boost_1_77_0' -PathType Container) ) { 
         Write-Host "Installing Boost C++ Source Code..."
