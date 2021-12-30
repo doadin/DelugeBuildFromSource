@@ -146,7 +146,7 @@ function Build64Deluge {
     if ( -not (Test-Path 'C:\msys64' -PathType Container) ) { 
         Write-Host "Installing msys..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        Start-Process -FilePath "C:\DelugeDownloads\msys2-x86_64-20211130.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
+        ## Start-Process -FilePath "C:\DelugeDownloads\msys2-x86_64-20211130.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
         7z x msys2-base-x86_64-20211130.tar.xz -oc:\DelugeDownloads\
         7z x msys2-base-x86_64-20211130.tar -oc:\
     }
