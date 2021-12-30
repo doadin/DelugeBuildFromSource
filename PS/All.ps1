@@ -181,7 +181,7 @@ function Build64Deluge {
     $env:Path += ";C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\bin;C:\msys64\usr\bin;"
     $env:BOOST_ROOT="c:\boost_1_77_0"
     $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
-    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\vcvars64.bat"
+    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     
     Write-Host "Compileing OpenSSL..."
     Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
@@ -325,8 +325,6 @@ function Build32Deluge {
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 14.1 ;'
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using gcc ;'
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Program Files\\Python37 : C:\\Program Files\\Python37\\include : C:\\Program Files\\Python37\\libs ;'
-        Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
-        Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
         7z x boost_1_77_0.zip -oc:\
     }
     if ( -not (Test-Path 'C:\openssl-master' -PathType Container) ) { 
@@ -373,3 +371,4 @@ if ( -not (test-is64bitOS)) {
     ## Build32Deluge
     Write-Host "32 Bit Build Setup Not Yet Supported..."
 }
+
