@@ -141,7 +141,7 @@ function Build64Deluge {
     if ( -not (Test-Path 'C:\Perl64' -PathType Container) ) { 
         Write-Host "Installing Strawberry Perl..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        7z x strawberry-perl-5.14.4.1-64bit-portable.zip -oc:\Perl64\
+        7z x strawberry-perl-5.32.1.1-64bit-portable.zip -oc:\Perl64\
     }
     if ( -not (Test-Path 'C:\msys64' -PathType Container) ) { 
         Write-Host "Installing msys..."
