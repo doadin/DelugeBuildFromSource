@@ -189,7 +189,7 @@ function Build64Deluge {
     Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
     perl configure VC-WIN64A --prefix=C:\OpenSSL-Win64
     nmake
-    nmake test
+    ## nmake test
     nmake install
     
     Write-Host "Prepareing Boost C++..."
