@@ -89,6 +89,10 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         Start-Process -FilePath "C:\DelugeDownloads\7z2106-x64.msi" -ArgumentList "/quiet", "/passive", "/norestart" -Wait
     }
+    
+    $env:Path = "C:\Program Files\7-Zip;$env:Path"
+    $env:Path += ";C:\Program Files\7-Zip;"
+    
     if ( -not (Test-Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017' -PathType Container) ) { 
         Write-Host "Installing Visual Studio 2017 Community..."
         Set-Location -Path 'C:\DelugeDownloads\'
