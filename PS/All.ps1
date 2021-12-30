@@ -43,7 +43,7 @@ function Build64Deluge {
         $WebClient.DownloadFile("https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.zip","C:\DelugeDownloads\nasm-2.15.05-win64.zip")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit-portable.zip' -PathType Leaf) ) { 
-        Write-Host "Downloading ActivePerl..."
+        Write-Host "Downloading Strawberry Perl..."
         $WebClient.DownloadFile("https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit-portable.zip","C:\DelugeDownloads\strawberry-perl-5.32.1.1-64bit-portable.zip")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\msys2-x86_64-20211130.exe' -PathType Leaf) ) { 
