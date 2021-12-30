@@ -131,7 +131,7 @@ function Build64Deluge {
     if ( -not (Test-Path 'C:\nasm-2.15.05' -PathType Container) ) { 
         Write-Host "Installing NASM..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        7z x nasm-2.15.05-win64.zip -oc:\
+        7z x nasm-2.15.05-win64.zip -oc:\nasm-2.15.05
     }
     ## if ( -not (Test-Path 'C:\Perl64' -PathType Container) ) { 
     ##     Write-Host "Installing Active State Perl..."
