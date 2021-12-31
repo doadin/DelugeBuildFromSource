@@ -123,10 +123,10 @@ function Build64Deluge {
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '      }'
         Start-Process -FilePath "C:\DelugeDownloads\vs_Community.exe" -ArgumentList "--norestart", "--quiet", "--config C:\DelugeDownloads\vsconfig.conf" -Wait
     }
-    if ( -not (Test-Path 'C:\Program Files\Python37' -PathType Container) ) { 
+    if ( -not (Test-Path 'C:\Python37' -PathType Container) ) { 
         Write-Host "Installing Python..."
         Set-Location -Path 'C:\DelugeDownloads\'
-        Start-Process -FilePath "C:\DelugeDownloads\python-3.7.9-amd64.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0" -Wait
+        Start-Process -FilePath "C:\DelugeDownloads\python-3.7.9-amd64.exe" -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=0", "Include_test=0", "TargetDir=C:\Python37" -Wait
     }
     if ( -not (Test-Path 'C:\nasm-2.15.05' -PathType Container) ) { 
         Write-Host "Installing NASM..."
@@ -155,7 +155,7 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         New-Item -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam"
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 14.1 ;'
-        Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Program Files\\Python37 : C:\\Program Files\\Python37\\include : C:\\Program Files\\Python37\\libs ;'
+        Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Python37 : C:\\Python37\\include : C:\\Python37\\libs ;'
         7z x boost_1_77_0.zip -oc:\
     }
     if ( -not (Test-Path 'C:\openssl-OpenSSL_1_1_1m' -PathType Container) ) { 
@@ -179,8 +179,8 @@ function Build64Deluge {
         7z x deluge.zip -oc:\
     }
 
-    $env:Path = "C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
-    $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Program Files\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
+    $env:Path = "C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
+    $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     $env:BOOST_ROOT="c:\boost_1_77_0"
     $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\VC\Auxiliary\build\vcvars64.bat"
