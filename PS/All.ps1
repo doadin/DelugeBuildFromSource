@@ -204,6 +204,7 @@ function Build64Deluge {
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path 'C:\gvsbuild-master'
+    pip install wheel
     ## python .\build.py build -p=x64 --same-python --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
     python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
