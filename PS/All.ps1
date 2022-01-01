@@ -203,9 +203,9 @@ function Build64Deluge {
     b2
     
     Write-Host "Compileing Lbitorrent For Python..."
-    Set-Location -Path 'C:\libtorrent-RC_1_2'
+    Set-Location -Path 'C:\libtorrent-RC_1_2\bindings\python'
     #b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
-    b2 --hash boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
     Write-Host "Updating Pip..."
     python -m pip install --upgrade pip
