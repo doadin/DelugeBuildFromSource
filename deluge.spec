@@ -124,7 +124,7 @@ def Entrypoint(dist, group, name, **kwargs):
     "PySide2.QtCore",
     "PySide2",
     "PyQt5.QtCore"])
-    kwargs.setdefault('pathex', ['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib', "C:\\gtk-build\\gtk\\x64\\release\\share"])
+    kwargs.setdefault('pathex', ['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib', "C:\\gtk-build\\gtk\\x64\\release\\share", 'C:\\OpenSSL-Win64\\bin',])
     kwargs.setdefault('win_no_prefer_redirects', 'False')
     kwargs.setdefault('win_private_assemblies', 'False')
     packages = []
