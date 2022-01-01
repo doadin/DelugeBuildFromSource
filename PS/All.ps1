@@ -90,6 +90,11 @@ function Build64Deluge {
         Start-Process -FilePath "C:\DelugeDownloads\7z2106-x64.msi" -ArgumentList "/quiet", "/passive", "/norestart" -Wait
     }
     
+    if ( -not (Test-Path 'C:\DelugeDownloads\nsis-3.08.zip' -PathType Leaf) ) { 
+        Write-Host "Downloading Git..."
+        $WebClient.DownloadFile("https://phoenixnap.dl.sourceforge.net/project/nsis/NSIS%203/3.08/nsis-3.08.zip","C:\DelugeDownloads\nsis-3.08.zip")
+    }
+    
     $env:Path = "C:\Program Files\7-Zip;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;"
     
@@ -171,6 +176,12 @@ function Build64Deluge {
         Write-Host "Installing Deluge Source Code..."
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x deluge.zip -oc:\
+    }
+    
+    if ( -not (Test-Path 'C:\nsis-3.08' -PathType Container) ) { 
+        Write-Host "Installing NASM..."
+        Set-Location -Path 'C:\DelugeDownloads\'
+        7z x nsis-3.08.zip -oc:\
     }
 
     $env:Path = "C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
