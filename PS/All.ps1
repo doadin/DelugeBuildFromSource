@@ -91,7 +91,7 @@ function Build64Deluge {
     }
     
     if ( -not (Test-Path 'C:\DelugeDownloads\nsis-3.08.zip' -PathType Leaf) ) { 
-        Write-Host "Downloading Git..."
+        Write-Host "Downloading NSIS..."
         $WebClient.DownloadFile("https://phoenixnap.dl.sourceforge.net/project/nsis/NSIS%203/3.08/nsis-3.08.zip","C:\DelugeDownloads\nsis-3.08.zip")
     }
     
@@ -179,7 +179,7 @@ function Build64Deluge {
     }
     
     if ( -not (Test-Path 'C:\nsis-3.08' -PathType Container) ) { 
-        Write-Host "Installing NASM..."
+        Write-Host "Installing NSIS..."
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x nsis-3.08.zip -oc:\
     }
