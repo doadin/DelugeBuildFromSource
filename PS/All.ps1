@@ -94,7 +94,7 @@ function Build64Deluge {
     $env:Path += ";C:\Program Files\7-Zip;"
     
     if ( -not (Test-Path 'C:\Program Files (x86)\Microsoft Visual Studio\2019' -PathType Container) ) { 
-        Write-Host "Installing Visual Studio 2017 Community..."
+        Write-Host "Installing Visual Studio 2019 Community..."
         Set-Location -Path 'C:\DelugeDownloads\'
         New-Item -Path "C:\DelugeDownloads\vsconfig.conf"
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '    {'
@@ -206,6 +206,7 @@ function Build64Deluge {
     python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=16 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
+    Write-Host "Compileing\Installing Deluge..."
     Set-Location -Path 'C:\deluge-develop\'
     New-Item -Path "C:\deluge-develop\RELEASE-VERSION"
     Add-Content -Path "C:\deluge-develop\RELEASE-VERSION" -Value '2.0.5'
@@ -213,6 +214,14 @@ function Build64Deluge {
     python setup.py clean
     python setup.py build
     python setup.py install
+    
+    Write-Host "Installing PyInstaller..."
+    pip install pyinstaller
+    
+    Write-Host "Downloading Spec File For Deluge PyInstaller..."
+    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-develop\deluge.spec")
+    pyinstaller --clean deluge.spec
+    
 }
 
 function Build32Deluge {
