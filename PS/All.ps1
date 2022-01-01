@@ -68,7 +68,7 @@ function Build64Deluge {
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\Deluge.zip' -PathType Leaf) ) { 
         Write-Host "Downloading Deluge Source Code..."
-        $WebClient.DownloadFile("https://github.com/deluge-torrent/deluge/archive/develop.zip","C:\DelugeDownloads\deluge.zip")
+        $WebClient.DownloadFile("https://github.com/deluge-torrent/deluge/archive/refs/tags/deluge-2.0.5.zip","C:\DelugeDownloads\deluge.zip")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\7z2106-x64.msi' -PathType Leaf) ) { 
         Write-Host "Downloading 7-zip..."
@@ -207,6 +207,8 @@ function Build64Deluge {
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
     Set-Location -Path 'C:\deluge-develop\'
+    New-Item -Path "C:\deluge-develop\RELEASE-VERSION"
+    Add-Content -Path "C:\deluge-develop\RELEASE-VERSION" -Value '2.0.5'
     python -m pip install -r requirements.txt
     python setup.py clean
     python setup.py build
