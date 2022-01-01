@@ -148,7 +148,7 @@ function Build64Deluge {
         Write-Host "Installing Boost C++ Source Code..."
         Set-Location -Path 'C:\DelugeDownloads\'
         New-Item -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam"
-        Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 14.1 ;'
+        Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using msvc : 15 ;'
         Add-Content -Path "$env:HOMEDRIVE\$env:HOMEPATH\user-config.jam" -Value 'using python : 3.7 : C:\\Python37 : C:\\Python37\\include : C:\\Python37\\libs ;'
         7z x boost_1_77_0.zip -oc:\
     }
@@ -193,8 +193,11 @@ function Build64Deluge {
     
     Write-Host "Compileing Lbitorrent For Python..."
     Set-Location -Path 'C:\libtorrent-RC_1_2'
-    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    #b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    b2 --hash boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
+    Write-Host "Updating Pip..."
+    python -m pip install --upgrade pip
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path 'C:\gvsbuild-master'
