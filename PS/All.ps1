@@ -31,14 +31,14 @@ function Build64Deluge {
     $WebClient = New-Object System.Net.WebClient
     
     if ( -not (Test-Path 'C:\DelugeDownloads\vs_Community.exe' -PathType Leaf) ) { 
-        Write-Host "Downloading Visual Studio 2017 Community..."
-        $WebClient.DownloadFile("https://download.visualstudio.microsoft.com/download/pr/57c99182-2828-4fc1-8b36-271e2472c838/91d7b8d8ba556b1e8723ca67a0f1e2e4a8274f7dfccbeae567e78b22f0db3f6d/vs_Community.exe","C:\DelugeDownloads\vs_Community.exe")
+        Write-Host "Downloading Visual Studio 2019 Community..."
+        $WebClient.DownloadFile("https://aka.ms/vs/16/release/vs_community.exe","C:\DelugeDownloads\vs_Community.exe")
     }
     if ( -not (Test-Path 'C:\DelugeDownloads\python-3.7.9-amd64.exe' -PathType Leaf) ) { 
         Write-Host "Downloading Python..."
         $WebClient.DownloadFile("https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe","C:\DelugeDownloads\python-3.7.9-amd64.exe")
     }
-    if ( -not (Test-Path 'C:\DelugeDownloads\nasm-2.15-win64.zip' -PathType Leaf) ) { 
+    if ( -not (Test-Path 'C:\DelugeDownloads\nasm-2.15.05-win64.zip' -PathType Leaf) ) { 
         Write-Host "Downloading Nasm..."
         $WebClient.DownloadFile("https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/win64/nasm-2.15.05-win64.zip","C:\DelugeDownloads\nasm-2.15.05-win64.zip")
     }
@@ -93,32 +93,26 @@ function Build64Deluge {
     $env:Path = "C:\Program Files\7-Zip;$env:Path"
     $env:Path += ";C:\Program Files\7-Zip;"
     
-    if ( -not (Test-Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017' -PathType Container) ) { 
+    if ( -not (Test-Path 'C:\Program Files (x86)\Microsoft Visual Studio\2019' -PathType Container) ) { 
         Write-Host "Installing Visual Studio 2017 Community..."
         Set-Location -Path 'C:\DelugeDownloads\'
         New-Item -Path "C:\DelugeDownloads\vsconfig.conf"
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '    {'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '        "version": "1.0",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '        "components": ['
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.CoreEditor",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Workload.CoreEditor",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Roslyn.Compiler",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.Component.MSBuild",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Static.Analysis.Tools",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Roslyn.Compiler",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.TextTemplating",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Debugger.JustInTime",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.CoreBuildTools",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.CoreIde",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.Redist.14.Latest",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Windows10SDK",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Graphics.Win81",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Graphics.Tools",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.DiagnosticTools",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Windows10SDK.17763",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.TestTools.BuildTools",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.ASAN",'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.CMake.Project",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.ATL",'
-        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Workload.NativeDesktop"'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",'
+        Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '          "Microsoft.VisualStudio.Component.Windows10SDK.19041"'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '        ]'
         Add-Content -Path "C:\DelugeDownloads\vsconfig.conf" -Value '      }'
         Start-Process -FilePath "C:\DelugeDownloads\vs_Community.exe" -ArgumentList "--norestart", "--quiet", "--config C:\DelugeDownloads\vsconfig.conf" -Wait
@@ -183,7 +177,7 @@ function Build64Deluge {
     $env:Path += ";C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     $env:BOOST_ROOT="c:\boost_1_77_0"
     $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
-    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\VC\Auxiliary\build\vcvars64.bat"
+    Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\VC\Auxiliary\build\vcvars64.bat"
     
     Write-Host "Compileing OpenSSL..."
     Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
@@ -199,14 +193,14 @@ function Build64Deluge {
     
     Write-Host "Compileing Lbitorrent For Python..."
     Set-Location -Path 'C:\libtorrent-RC_1_2'
-    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-14.1 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
+    b2 --hash libtorrent-link=static boost-link=static release toolset=msvc-15 optimization=space runtime-link=static link=static python=3.7 address-model=64 crypto=openssl openssl-include=C:\OpenSSL-Win64\include openssl-lib=C:\OpenSSL-Win64\lib
     
 
     Write-Host "Compileing GTK+3 For Python..."
     Set-Location -Path 'C:\gvsbuild-master'
     pip install wheel
     ## python .\build.py build -p=x64 --same-python --vs-ver=15 --msys-dir=C:\msys64 --gtk3-ver=3.24 gtk3
-    python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
+    python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=16 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
     Set-Location -Path 'C:\deluge-develop\'
