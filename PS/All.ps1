@@ -218,9 +218,9 @@ function Build64Deluge {
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
     Write-Host "Compileing\Installing Deluge..."
-    Set-Location -Path 'C:\deluge-develop\'
-    New-Item -Path "C:\deluge-develop\RELEASE-VERSION"
-    Add-Content -Path "C:\deluge-develop\RELEASE-VERSION" -Value '2.0.5'
+    Set-Location -Path 'C:\deluge-deluge-2.0.5\'
+    New-Item -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION"
+    Add-Content -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION" -Value '2.0.5'
     python -m pip install -r requirements.txt
     python setup.py clean
     python setup.py build
