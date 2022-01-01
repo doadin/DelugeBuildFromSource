@@ -233,8 +233,11 @@ function Build64Deluge {
     pip install pyinstaller
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
-    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-develop\deluge.spec")
-    pyinstaller --clean deluge.spec
+    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-deluge-2.0.5\deluge.spec")
+    pyinstaller --clean deluge.spec --distpath ./packaging/win32/freeze
+    
+    ## python delugensis.py
+    
     
 }
 
