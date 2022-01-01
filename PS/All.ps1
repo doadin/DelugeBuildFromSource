@@ -217,7 +217,6 @@ function Build64Deluge {
     python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=16 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
-    $env:Path = "C:\gtk-build\gtk\x64\release\bin;" + $env:Path
     $env:Path = "C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
     $env:Path += ";C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     
