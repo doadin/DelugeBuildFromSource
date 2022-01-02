@@ -235,6 +235,8 @@ function Build64Deluge {
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
     $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-deluge-2.0.5\deluge.spec")
     pyinstaller --clean deluge.spec --distpath ./packaging/win32/freeze
+    #Better done in freeze?
+    Move-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5.EGG_INFO"
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
     Set-Location -Path 'C:\deluge-deluge-2.0.5\packaging\win32'
