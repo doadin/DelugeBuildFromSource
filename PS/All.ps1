@@ -247,6 +247,8 @@ function Build64Deluge {
     $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/delugensis.py","C:\deluge-deluge-2.0.5\packaging\win32\delugensis.py")
     python delugensis.py
     
+    makensis deluge-win32-installer.nsi
+    
     
 }
 
