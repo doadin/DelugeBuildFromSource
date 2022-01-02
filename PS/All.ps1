@@ -220,6 +220,9 @@ function Build64Deluge {
     $env:Path = "C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
     $env:Path += ";C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     
+    $libtorrentpath = Get-Childitem –Path "C:\libtorrent-RC_1_2\bindings\python" -Include libtorrent.pyd -File -Recurse -ErrorAction SilentlyContinue | select -expand FullName
+    Move-Item –Path $libtorrentpath -Destination "C:\Python37\lib\site-packages\libtorrent.pyd"
+    
     Write-Host "Compileing\Installing Deluge..."
     Set-Location -Path 'C:\deluge-deluge-2.0.5\'
     New-Item -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION"
