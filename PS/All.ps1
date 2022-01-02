@@ -240,6 +240,7 @@ function Build64Deluge {
     pyinstaller --clean deluge.spec --distpath ./packaging/win32/freeze
     #Better done in freeze?
     Move-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5.py3.7.egg\egg-info\"
+    Remove-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5.py3.7.egg\egg-info\requirments.txt"
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
     Set-Location -Path 'C:\deluge-deluge-2.0.5\packaging\win32'
