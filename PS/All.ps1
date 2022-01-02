@@ -239,8 +239,8 @@ function Build64Deluge {
     $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-deluge-2.0.5\deluge.spec")
     pyinstaller --clean deluge.spec --distpath ./packaging/win32/freeze
     #Better done in freeze?
-    Move-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5.py3.7.egg\EGG-INFO\"
-    Remove-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5.py3.7.egg\egg-info\requirments.txt"
+    Move-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg"
+    Remove-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg\EGG-INFO\requires.txt"
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
     Set-Location -Path 'C:\deluge-deluge-2.0.5\packaging\win32'
