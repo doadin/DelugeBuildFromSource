@@ -66,10 +66,10 @@ function Build64Deluge {
         Write-Host "Downloading Libtorrent Source Code..."
         $WebClient.DownloadFile("https://github.com/arvidn/libtorrent/archive/RC_1_2.zip","C:\DelugeDownloads\libtorrent.zip")
     }
-    if ( -not (Test-Path 'C:\DelugeDownloads\Deluge.zip' -PathType Leaf) ) { 
-        Write-Host "Downloading Deluge Source Code..."
-        $WebClient.DownloadFile("https://github.com/deluge-torrent/deluge/archive/refs/tags/deluge-2.0.5.zip","C:\DelugeDownloads\deluge.zip")
-    }
+    ##if ( -not (Test-Path 'C:\DelugeDownloads\Deluge.zip' -PathType Leaf) ) { 
+    ##    Write-Host "Downloading Deluge Source Code..."
+    ##    $WebClient.DownloadFile("https://github.com/deluge-torrent/deluge/archive/refs/tags/deluge-2.0.5.zip","C:\DelugeDownloads\deluge.zip")
+    ##}
     if ( -not (Test-Path 'C:\DelugeDownloads\7z2106-x64.msi' -PathType Leaf) ) { 
         Write-Host "Downloading 7-zip..."
         $WebClient.DownloadFile("https://www.7-zip.org/a/7z2106-x64.msi","C:\DelugeDownloads\7z2106-x64.msi")
@@ -172,11 +172,11 @@ function Build64Deluge {
         Set-Location -Path 'C:\DelugeDownloads\'
         7z x libtorrent.zip -oc:\
     }
-    if ( -not (Test-Path 'C:\deluge-develop' -PathType Container) ) { 
-        Write-Host "Installing Deluge Source Code..."
-        Set-Location -Path 'C:\DelugeDownloads\'
-        7z x deluge.zip -oc:\
-    }
+    ##if ( -not (Test-Path 'C:\deluge-develop' -PathType Container) ) { 
+    ##    Write-Host "Installing Deluge Source Code..."
+    ##    Set-Location -Path 'C:\DelugeDownloads\'
+    ##    7z x deluge.zip -oc:\
+    ##}
     
     if ( -not (Test-Path 'C:\nsis-3.08' -PathType Container) ) { 
         Write-Host "Installing NSIS..."
@@ -189,6 +189,12 @@ function Build64Deluge {
     $env:BOOST_ROOT="c:\boost_1_77_0"
     $env:BOOST_BUILD_PATH="c:\boost_1_77_0\tools\build"
     Invoke-BatchFile "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\VC\Auxiliary\build\vcvars64.bat"
+
+    if ( -not (Test-Path 'C:\deluge' -PathType Container) ) { 
+        Write-Host "Installing Deluge Source Code..."
+        Set-Location -Path 'C:\'
+        git clone https://github.com/deluge-torrent/deluge.git
+    }
     
     Write-Host "Compileing OpenSSL..."
     Set-Location -Path 'C:\openssl-OpenSSL_1_1_1m\'
@@ -224,9 +230,10 @@ function Build64Deluge {
     Move-Item –Path $libtorrentpath -Destination "C:\Python37\lib\site-packages\libtorrent.pyd"
     
     Write-Host "Compileing\Installing Deluge..."
-    Set-Location -Path 'C:\deluge-deluge-2.0.5\'
-    New-Item -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION"
-    Add-Content -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION" -Value '2.0.5'
+    ##Set-Location -Path 'C:\deluge-deluge-2.0.5\'
+    Set-Location -Path 'C:\deluge\'
+    ##New-Item -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION"
+    ##Add-Content -Path "C:\deluge-deluge-2.0.5\RELEASE-VERSION" -Value '2.0.5'
     python -m pip install -r requirements.txt
     python setup.py clean
     python setup.py build
