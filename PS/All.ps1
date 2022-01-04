@@ -206,7 +206,7 @@ function Build64Deluge {
     Write-Host "Prepareing Boost C++..."
     Set-Location -Path 'C:\boost_1_77_0\'
     Invoke-BatchFile "C:\boost_1_77_0\bootstrap.bat"
-    b2
+    #b2
     
     Write-Host "Compileing Lbitorrent For Python..."
     Set-Location -Path 'C:\libtorrent-RC_1_2\bindings\python'
