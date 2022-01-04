@@ -223,8 +223,8 @@ function Build64Deluge {
     python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=16 --platform=x64 --same-python -k --enable-gi --py-wheel enchant gtk3-full pycairo pygobject lz4 --skip gtksourceview,emeus,clutter --capture-out --print-out
     ## python build.py -d build --clean --gtk3-ver=3.24 --vs-ver=15 --platform=x64 --same-python -k --enable-gi --py-wheel --py-egg enchant gtk gtk3-full pycairo pygobject lz4
     
-    $env:Path = "C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
-    $env:Path += ";C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
+    $env:Path = "C:\nsis-3.08;C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;$env:Path"
+    $env:Path += ";C:\nsis-3.08;C:\gtk-build\gtk\x64\release\bin;C:\Program Files\Git\bin;C:\Program Files\7-Zip;C:\Python37;C:\Python37\Scripts;C:\boost_1_77_0;C:\nasm-2.15.05;C:\Perl64\perl\bin;C:\msys64\usr\bin;"
     
     $libtorrentpath = Get-Childitem –Path "C:\libtorrent-RC_1_2\bindings\python" -Include libtorrent.pyd -File -Recurse -ErrorAction SilentlyContinue | select -expand FullName
     Move-Item –Path $libtorrentpath -Destination "C:\Python37\lib\site-packages\libtorrent.pyd"
@@ -243,18 +243,19 @@ function Build64Deluge {
     pip install pyinstaller
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
-    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge.spec","C:\deluge-deluge-2.0.5\deluge.spec")
-    pyinstaller --clean deluge.spec --distpath ./packaging/win32/freeze
+    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge2.spec","C:\deluge\deluge.spec")
+    Set-Location -Path 'C:\Python37\Scripts'
+    pyinstaller --clean C:\deluge\deluge.spec --distpath C:\deluge\packaging\win32\freeze
     #Better done in freeze?
-    Move-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg"
-    Remove-Item –Path "C:\deluge-deluge-2.0.5\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg\EGG-INFO\requires.txt"
+    #Move-Item –Path "C:\deluge\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg"
+    #Remove-Item –Path "C:\deluge\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg\EGG-INFO\requires.txt"
     
-    Write-Host "Downloading Spec File For Deluge PyInstaller..."
-    Set-Location -Path 'C:\deluge-deluge-2.0.5\packaging\win32'
-    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/delugensis.py","C:\deluge-deluge-2.0.5\packaging\win32\delugensis.py")
-    python delugensis.py
+    Write-Host "Downloading NSIS File For Deluge Installer..."
+    Set-Location -Path 'C:\deluge\packaging\win32'
+    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/delugensis.py","C:\deluge\packaging\win32\delugensis.py")
+    #python delugensis.py
     
-    makensis deluge-win32-installer.nsi
+    #makensis deluge-win32-installer.nsi
     
     
 }

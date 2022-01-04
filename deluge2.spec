@@ -3,6 +3,7 @@ from PyInstaller.utils.hooks import collect_all
 
 datas = []
 binaries = []
+extendpathdeluge=['C:\\gtk-build\\gtk\\x64\\release\\bin', 'C:\\gtk-build\\gtk\\x64\\release\\lib', "C:\\gtk-build\\gtk\\x64\\release\\share", 'C:\\OpenSSL-Win64\\bin',]
 hiddenimports = ['gi', 'cairo', 'deluge']
 tmp_ret = collect_all('deluge')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
@@ -12,7 +13,7 @@ block_cipher = None
 
 #deluge-script.pyw
 a = Analysis(['deluge-script.pyw'],
-             pathex=[],
+             pathex=extendpathdeluge,
              binaries=binaries,
              datas=datas,
              hiddenimports=hiddenimports,
@@ -36,7 +37,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          icon='deluge/ui/data/pixmaps/deluge.ico'
+          icon='deluge/ui/data/pixmaps/deluge.ico',
           console=False,
           disable_windowed_traceback=False,
           target_arch=None,
@@ -45,7 +46,7 @@ exe = EXE(pyz,
 
 #deluge-web-script.pyw
 b = Analysis(['deluge-web-script.pyw'],
-             pathex=[],
+             pathex=extendpathdeluge,
              binaries=binaries,
              datas=datas,
              hiddenimports=hiddenimports,
@@ -69,7 +70,7 @@ exeb = EXE(pyzb,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          icon='deluge/ui/data/pixmaps/deluge.ico'
+          icon='deluge/ui/data/pixmaps/deluge.ico',
           console=False,
           disable_windowed_traceback=False,
           target_arch=None,
@@ -78,7 +79,7 @@ exeb = EXE(pyzb,
 
 #deluge-gtk-script.pyw
 c = Analysis(['deluge-gtk-script.pyw'],
-             pathex=[],
+             pathex=extendpathdeluge,
              binaries=binaries,
              datas=datas,
              hiddenimports=hiddenimports,
@@ -102,7 +103,7 @@ exec = EXE(pyzc,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          icon='deluge/ui/data/pixmaps/deluge.ico'
+          icon='deluge/ui/data/pixmaps/deluge.ico',
           console=False,
           disable_windowed_traceback=False,
           target_arch=None,
@@ -111,7 +112,7 @@ exec = EXE(pyzc,
 
 #deluged-script.pyw
 d = Analysis(['deluged-script.pyw'],
-             pathex=[],
+             pathex=extendpathdeluge,
              binaries=binaries,
              datas=datas,
              hiddenimports=hiddenimports,
@@ -135,7 +136,7 @@ exed = EXE(pyzd,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          icon='deluge/ui/data/pixmaps/deluge.ico'
+          icon='deluge/ui/data/pixmaps/deluge.ico',
           console=False,
           disable_windowed_traceback=False,
           target_arch=None,
@@ -145,9 +146,9 @@ exed = EXE(pyzd,
 
 #End
 coll = COLLECT(exe,
-               exeb
-               exec
-               exed
+               exeb,
+               exec,
+               exed,
                a.binaries,
                a.zipfiles,
                a.datas, 
