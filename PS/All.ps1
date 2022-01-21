@@ -241,19 +241,18 @@ function Build64Deluge {
     pip install pyinstaller
     
     Write-Host "Downloading Spec File For Deluge PyInstaller..."
-    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/deluge2.spec","C:\deluge\deluge.spec")
-    Set-Location -Path 'C:\Python37\Scripts'
-    pyinstaller --clean C:\deluge\deluge.spec --distpath C:\deluge\packaging\win32\freeze
+    Set-Location -Path 'C:\deluge\packaging\win'
+    pyinstaller --clean delugewin.spec --distpath C:\deluge\packaging\win\freeze
     #Better done in freeze?
     #Move-Item –Path "C:\deluge\packaging\win32\freeze\Deluge\deluge" -Destination "C:\deluge\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg"
     #Remove-Item –Path "C:\deluge\packaging\win32\freeze\Deluge\deluge-2.0.5-py3.7.egg\EGG-INFO\requires.txt"
     
     Write-Host "Downloading NSIS File For Deluge Installer..."
-    Set-Location -Path 'C:\deluge\packaging\win32'
-    $WebClient.DownloadFile("https://github.com/doadin/DelugeBuildFromSource/raw/master/delugensis.py","C:\deluge\packaging\win32\delugensis.py")
-    #python delugensis.py
+    Set-Location -Path 'C:\deluge\packaging\win'
+    python setup_nsis.py
     
-    #makensis deluge-win32-installer.nsi
+    Set-Location -Path 'C:\deluge\packaging\win'
+    #makensis deluge-win-installer.nsi
     
     
 }
