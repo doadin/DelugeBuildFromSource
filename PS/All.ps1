@@ -92,7 +92,7 @@ function Build64Deluge {
     
     if ( -not (Test-Path 'C:\DelugeDownloads\nsis-3.08.zip' -PathType Leaf) ) { 
         Write-Host "Downloading NSIS..."
-        $WebClient.DownloadFile("https://phoenixnap.dl.sourceforge.net/project/nsis/NSIS%203/3.08/nsis-3.08.zip","C:\DelugeDownloads\nsis-3.08.zip")
+        $WebClient.DownloadFile("https://iweb.dl.sourceforge.net/project/nsis/NSIS%203/3.08/nsis-3.08.zip","C:\DelugeDownloads\nsis-3.08.zip")
     }
     
     $env:Path = "C:\Program Files\7-Zip;$env:Path"
